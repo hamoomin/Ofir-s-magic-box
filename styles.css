@@ -140,6 +140,18 @@ select {
     text-align: left;
 }
 
+.page-number {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.custom-message {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 1.2em;
+    color: #000000;
+}
+
 @media print {
     body {
         margin: 0;

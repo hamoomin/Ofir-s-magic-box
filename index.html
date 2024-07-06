@@ -43,7 +43,7 @@
             </div>
             <div class="form-group" id="functionTypeGroup" style="display:none;">
                 <label for="functionType">סוג פונקציה:</label>
-                <select id="functionType" name="functionType">
+                <select id="functionType" name="functionType" onchange="toggleFunctionType()">
                     <option value="">בחר סוג פונקציה</option>
                     <option value="polynomial">פולינום</option>
                     <option value="product">מכפלה</option>
@@ -59,12 +59,21 @@
                 <label for="numPages">מספר עמודים:</label>
                 <input type="number" id="numPages" name="numPages" min="1" max="10" value="1">
             </div>
+            <div class="form-group">
+                <label for="customMessage">איחול בהצלחה:</label>
+                <input type="text" id="customMessage" name="customMessage" placeholder="כתוב כאן איחול בהצלחה">
+            </div>
+            <div class="form-group" id="includeAnswersGroup" style="display:none;">
+                <label for="includeAnswers">האם לכלול תשובות:</label>
+                <input type="checkbox" id="includeAnswers" name="includeAnswers">
+            </div>
             <div class="button-group">
                 <button class="btn preview-btn" onclick="previewWorksheet()">תצוגה מקדימה</button>
                 <button class="btn print-btn" onclick="printWorksheet()">הדפס</button>
             </div>
         </div>
         <div id="worksheet-output" class="worksheet-output"></div>
+        <div id="answers-output" class="worksheet-output"></div>
     </div>
     <script>
         function checkLevel() {

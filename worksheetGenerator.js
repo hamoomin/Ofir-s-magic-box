@@ -83,6 +83,20 @@ function generateExponentialQuestion(level, difficulty) {
     return `f(x) = ${coefficient} e^x`;
 }
 
+function differentiatePolynomial(question) {
+    const regex = /(\d+)x\^{(\d+)}/g;
+    let match;
+    let derivative = 'f\'(x) = ';
+    while ((match = regex.exec(question)) !== null) {
+        const coefficient = parseInt(match[1]);
+        const exponent = parseInt(match[2]);
+        const newCoefficient = coefficient * exponent;
+        const newExponent = exponent - 1;
+        derivative += `${newCoefficient}x^{${newExponent}} + `;
+    }
+    return derivative.slice(0, -3); // Remove the last ' + '
+}
+
 function previewWorksheet() {
     const title = document.getElementById('title').value;
     const level = parseInt(document.getElementById('level').value);
@@ -90,8 +104,10 @@ function previewWorksheet() {
     const subTopic = document.getElementById('subTopic').value;
     const functionType = document.getElementById('functionType').value;
     const numPages = parseInt(document.getElementById('numPages').value);
-    const questionsPerPage = 20; // מספר תרגילים בעמוד אחד
+    const questionsPerPage = 15; // מספר תרגילים בעמוד אחד
     const numQuestions = questionsPerPage * numPages;
+    const includeAnswers = document.getElementById('includeAnswers').checked;
+    const customMessage = document.getElementById('customMessage').value;
 
     if (!title || !topic || !subTopic || !functionType) {
         document.getElementById('worksheet-output').innerHTML = `<p style="color: red;">יש לבחור נושא, תת-נושא וסוג פונקציה.</p>`;
@@ -108,7 +124,9 @@ function previewWorksheet() {
 
     for (let page = 0; page < numPages; page++) {
         worksheetHTML += `<div class="worksheet-content">`;
-        worksheetHTML += `<h2 class="worksheet-title">${title}</h2>`;
+        if (page === 0) {
+            worksheetHTML += `<h2 class="worksheet-title">${title}</h2>`;
+        }
         worksheetHTML += `<p>גזור את הפונקציות הבאות:</p>`;
         worksheetHTML += `<table class="questions-table">`;
 
@@ -123,10 +141,38 @@ function previewWorksheet() {
         }
 
         worksheetHTML += `</table>`;
+        worksheetHTML += `<p class="custom-message">${customMessage}</p>`;
+        worksheetHTML += `<p class="page-number">עמוד ${page + 1}</p>`;
         worksheetHTML += `</div>`;
     }
 
     document.getElementById('worksheet-output').innerHTML = worksheetHTML;
+
+    // Render MathJax
+    MathJax.typeset();
+
+    if (includeAnswers && functionType === 'polynomial') {
+        generateAnswers(questions);
+    }
+}
+
+function generateAnswers(questions) {
+    let answersHTML = '<div class="worksheet-content">';
+    answersHTML += '<h2 class="worksheet-title">פתרונות</h2>';
+    answersHTML += '<table class="questions-table">';
+
+    questions.forEach((question, index) => {
+        const answer = differentiatePolynomial(question); // חישוב הנגזרת של הפולינום
+        answersHTML += `<tr>`;
+        answersHTML += `<td class="question-number">(${index + 1})</td>`;
+        answersHTML += `<td class="question-text">\\(${answer}\\)</td>`;
+        answersHTML += `</tr>`;
+    });
+
+    answersHTML += '</table>';
+    answersHTML += '</div>';
+
+    document.getElementById('answers-output').innerHTML = answersHTML;
 
     // Render MathJax
     MathJax.typeset();
@@ -147,22 +193,41 @@ function toggleSubTopic() {
 function toggleFunctionType() {
     const subTopic = document.getElementById('subTopic').value;
     const functionTypeGroup = document.getElementById('functionTypeGroup');
+    const includeAnswersGroup = document.getElementById('includeAnswersGroup');
     if (subTopic === 'derivative') {
         functionTypeGroup.style.display = 'block';
+        if (document.getElementById('functionType').value === 'polynomial') {
+            includeAnswersGroup.style.display = 'block';
+        } else {
+            includeAnswersGroup.style.display = 'none';
+        }
     } else {
         functionTypeGroup.style.display = 'none';
+        includeAnswersGroup.style.display = 'none';
         document.getElementById('functionType').value = '';
     }
 }
 
+document.getElementById('functionType').addEventListener('change', function() {
+    const functionType = document.getElementById('functionType').value;
+    const includeAnswersGroup = document.getElementById('includeAnswersGroup');
+    if (functionType === 'polynomial') {
+        includeAnswersGroup.style.display = 'block';
+    } else {
+        includeAnswersGroup.style.display = 'none';
+    }
+});
+
 function printWorksheet() {
     const printContents = document.getElementById('worksheet-output').innerHTML;
+    const answersContents = document.getElementById('answers-output').innerHTML;
     const printWindow = window.open('', '', 'height=1123,width=794');
     printWindow.document.write('<html><head><title>Print Worksheet</title>');
     printWindow.document.write('<link rel="stylesheet" href="styles.css">');
     printWindow.document.write('</head><body>');
     printWindow.document.write('<div class="print-container">');
     printWindow.document.write(printContents);
+    printWindow.document.write(answersContents);
     printWindow.document.write('</div></body></html>');
     printWindow.document.close();
     printWindow.print();
