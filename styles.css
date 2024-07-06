@@ -43,7 +43,8 @@ label {
 
 input[type="text"],
 input[type="number"],
-select {
+select,
+textarea {
     width: 100%;
     padding: 10px;
     margin-top: 5px;
@@ -59,6 +60,12 @@ select {
     justify-content: space-between;
 }
 
+.button-group-vertical {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .btn {
     padding: 10px 20px;
     background-color: #00e6e6;
@@ -68,11 +75,16 @@ select {
     cursor: pointer;
     font-size: 16px;
     transition: background-color 0.3s, transform 0.3s;
+    margin-bottom: 10px;
 }
 
 .btn:hover {
     background-color: #00cccc;
     transform: scale(1.05);
+}
+
+.full-width-btn {
+    width: 100%;
 }
 
 .preview-btn {
@@ -88,6 +100,22 @@ select {
 }
 
 .print-btn:hover {
+    background-color: #00cccc;
+}
+
+.generate-btn {
+    background-color: #00e6e6;
+}
+
+.generate-btn:hover {
+    background-color: #00cccc;
+}
+
+.copy-btn {
+    background-color: #00e6e6;
+}
+
+.copy-btn:hover {
     background-color: #00cccc;
 }
 
@@ -150,6 +178,20 @@ select {
     margin-top: 20px;
     font-size: 1.2em;
     color: #000000;
+}
+
+.lesson-plan-content {
+    background-color: #ffffff;
+    color: #000000;
+    padding: 20px;
+    border-radius: 12px;
+    margin-top: 20px;
+}
+
+.lesson-plan-title {
+    text-align: center;
+    color: #000000;
+    font-size: 1.5em;
 }
 
 @media print {

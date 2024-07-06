@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>הפרומט הקסום של אופיר</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="lessonPlanGenerator.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <h1>הפרומט הקסום של אופיר</h1>
+        <div class="form">
+            <div class="form-group">
+                <label for="teacherName">שם המורה:</label>
+                <input type="text" id="teacherName" name="teacherName" placeholder="כתוב כאן את שמך">
+            </div>
+            <div class="form-group">
+                <label for="subject">מקצוע:</label>
+                <input type="text" id="subject" name="subject" placeholder="כתוב כאן מקצוע">
+            </div>
+            <div class="form-group">
+                <label for="classNumber">מספר כיתה:</label>
+                <input type="text" id="classNumber" name="classNumber" placeholder="כתוב כאן מספר כיתה">
+            </div>
+            <div class="form-group">
+                <label for="lessonTopic">נושא השיעור:</label>
+                <input type="text" id="lessonTopic" name="lessonTopic" placeholder="כתוב כאן נושא השיעור">
+            </div>
+            <div class="form-group">
+                <label for="lessonLevel">רמת לימוד:</label>
+                <input type="text" id="lessonLevel" name="lessonLevel" placeholder="כתוב כאן רמת לימוד">
+            </div>
+            <div class="form-group">
+                <label for="activityType">סוג פעילות:</label>
+                <select id="activityType" name="activityType">
+                    <option value="">בחר סוג פעילות</option>
+                    <option value="game">משחק</option>
+                    <option value="lecture">הרצאה</option>
+                    <option value="presentation">מצגת</option>
+                    <option value="video">סרטון</option>
+                    <option value="digitalActivity">פעילות דיגיטלית</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="lessonDetails">פרטי השיעור:</label>
+                <textarea id="lessonDetails" name="lessonDetails" rows="4" placeholder="כתוב כאן פרטי השיעור"></textarea>
+            </div>
+            <div class="button-group">
+                <button class="btn generate-btn" onclick="generateLessonPlan()">צור מערך שיעור</button>
+                <button class="btn copy-btn" onclick="copyLessonPlan()">העתק מערך שיעור</button>
+            </div>
+        </div>
+        <div id="lesson-plan-output" class="worksheet-output"></div>
+    </div>
+</body>
+</html>

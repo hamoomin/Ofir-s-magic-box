@@ -83,20 +83,6 @@ function generateExponentialQuestion(level, difficulty) {
     return `f(x) = ${coefficient} e^x`;
 }
 
-function differentiatePolynomial(question) {
-    const regex = /(\d+)x\^{(\d+)}/g;
-    let match;
-    let derivative = 'f\'(x) = ';
-    while ((match = regex.exec(question)) !== null) {
-        const coefficient = parseInt(match[1]);
-        const exponent = parseInt(match[2]);
-        const newCoefficient = coefficient * exponent;
-        const newExponent = exponent - 1;
-        derivative += `${newCoefficient}x^{${newExponent}} + `;
-    }
-    return derivative.slice(0, -3); // Remove the last ' + '
-}
-
 function previewWorksheet() {
     const title = document.getElementById('title').value;
     const level = parseInt(document.getElementById('level').value);
@@ -106,7 +92,6 @@ function previewWorksheet() {
     const numPages = parseInt(document.getElementById('numPages').value);
     const questionsPerPage = 15; // מספר תרגילים בעמוד אחד
     const numQuestions = questionsPerPage * numPages;
-    const includeAnswers = document.getElementById('includeAnswers').checked;
     const customMessage = document.getElementById('customMessage').value;
 
     if (!title || !topic || !subTopic || !functionType) {
@@ -147,32 +132,6 @@ function previewWorksheet() {
     }
 
     document.getElementById('worksheet-output').innerHTML = worksheetHTML;
-
-    // Render MathJax
-    MathJax.typeset();
-
-    if (includeAnswers && functionType === 'polynomial') {
-        generateAnswers(questions);
-    }
-}
-
-function generateAnswers(questions) {
-    let answersHTML = '<div class="worksheet-content">';
-    answersHTML += '<h2 class="worksheet-title">פתרונות</h2>';
-    answersHTML += '<table class="questions-table">';
-
-    questions.forEach((question, index) => {
-        const answer = differentiatePolynomial(question); // חישוב הנגזרת של הפולינום
-        answersHTML += `<tr>`;
-        answersHTML += `<td class="question-number">(${index + 1})</td>`;
-        answersHTML += `<td class="question-text">\\(${answer}\\)</td>`;
-        answersHTML += `</tr>`;
-    });
-
-    answersHTML += '</table>';
-    answersHTML += '</div>';
-
-    document.getElementById('answers-output').innerHTML = answersHTML;
 
     // Render MathJax
     MathJax.typeset();
