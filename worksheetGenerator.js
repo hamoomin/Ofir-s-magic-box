@@ -1,31 +1,31 @@
-function generateQuestions(level, subTopic, numQuestions) {
+function generateQuestions(level, functionType, numQuestions) {
     const questions = [];
     for (let i = 0; i < numQuestions; i++) {
         let question;
-        switch (subTopic) {
+        switch (functionType) {
             case 'polynomial':
-                question = generatePolynomialQuestion(level);
+                question = generatePolynomialQuestion(level, i + 1);
                 break;
             case 'product':
-                question = generateProductQuestion(level);
+                question = generateProductQuestion(level, i + 1);
                 break;
             case 'quotient':
-                question = generateQuotientQuestion(level);
+                question = generateQuotientQuestion(level, i + 1);
                 break;
             case 'root':
-                question = generateRootQuestion(level);
+                question = generateRootQuestion(level, i + 1);
                 break;
             case 'combined':
-                question = generateCombinedQuestion(level);
+                question = generateCombinedQuestion(level, i + 1);
                 break;
             case 'trigonometric':
-                question = generateTrigonometricQuestion(level);
+                question = generateTrigonometricQuestion(level, i + 1);
                 break;
             case 'logarithmic':
-                question = generateLogarithmicQuestion(level);
+                question = generateLogarithmicQuestion(level, i + 1);
                 break;
             case 'exponential':
-                question = generateExponentialQuestion(level);
+                question = generateExponentialQuestion(level, i + 1);
                 break;
         }
         questions.push(question);
@@ -33,92 +33,92 @@ function generateQuestions(level, subTopic, numQuestions) {
     return questions;
 }
 
-function generatePolynomialQuestion(level) {
-    const coefficients = Array.from({ length: 3 }, () => Math.floor(Math.random() * 10) + 1);
-    const exponents = Array.from({ length: 3 }, () => Math.floor(Math.random() * 5) + 1);
+function generatePolynomialQuestion(level, difficulty) {
+    const coefficients = Array.from({ length: 3 }, () => Math.floor(Math.random() * difficulty) + 1);
+    const exponents = Array.from({ length: 3 }, () => Math.floor(Math.random() * difficulty) + 1);
     return `f(x) = ${coefficients.map((coef, i) => `${coef}x^{${exponents[i]}}`).join(' + ')}`;
 }
 
-function generateProductQuestion(level) {
-    const coefficients1 = Array.from({ length: 3 }, () => Math.floor(Math.random() * 10) + 1);
-    const exponents1 = Array.from({ length: 3 }, () => Math.floor(Math.random() * 5) + 1);
-    const coefficients2 = Array.from({ length: 3 }, () => Math.floor(Math.random() * 10) + 1);
-    const exponents2 = Array.from({ length: 3 }, () => Math.floor(Math.random() * 5) + 1);
+function generateProductQuestion(level, difficulty) {
+    const coefficients1 = Array.from({ length: 3 }, () => Math.floor(Math.random() * difficulty) + 1);
+    const exponents1 = Array.from({ length: 3 }, () => Math.floor(Math.random() * difficulty) + 1);
+    const coefficients2 = Array.from({ length: 3 }, () => Math.floor(Math.random() * difficulty) + 1);
+    const exponents2 = Array.from({ length: 3 }, () => Math.floor(Math.random() * difficulty) + 1);
     return `f(x) = (${coefficients1.map((coef, i) => `${coef}x^{${exponents1[i]}}`).join(' + ')}) \\cdot (${coefficients2.map((coef, i) => `${coef}x^{${exponents2[i]}}`).join(' + ')})`;
 }
 
-function generateQuotientQuestion(level) {
-    const coefficients1 = Array.from({ length: 3 }, () => Math.floor(Math.random() * 10) + 1);
-    const exponents1 = Array.from({ length: 3 }, () => Math.floor(Math.random() * 5) + 1);
-    const coefficients2 = Array.from({ length: 3 }, () => Math.floor(Math.random() * 10) + 1);
-    const exponents2 = Array.from({ length: 3 }, () => Math.floor(Math.random() * 5) + 1);
+function generateQuotientQuestion(level, difficulty) {
+    const coefficients1 = Array.from({ length: 3 }, () => Math.floor(Math.random() * difficulty) + 1);
+    const exponents1 = Array.from({ length: 3 }, () => Math.floor(Math.random() * difficulty) + 1);
+    const coefficients2 = Array.from({ length: 3 }, () => Math.floor(Math.random() * difficulty) + 1);
+    const exponents2 = Array.from({ length: 3 }, () => Math.floor(Math.random() * difficulty) + 1);
     return `f(x) = \\frac{${coefficients1.map((coef, i) => `${coef}x^{${exponents1[i]}}`).join(' + ')}}{${coefficients2.map((coef, i) => `${coef}x^{${exponents2[i]}}`).join(' + ')}}`;
 }
 
-function generateRootQuestion(level) {
-    const coefficient = Math.floor(Math.random() * 10) + 1;
+function generateRootQuestion(level, difficulty) {
+    const coefficient = Math.floor(Math.random() * difficulty) + 1;
     return `f(x) = \\sqrt{${coefficient}x}`;
 }
 
-function generateCombinedQuestion(level) {
-    const coefficients1 = Array.from({ length: 3 }, () => Math.floor(Math.random() * 10) + 1);
-    const exponents1 = Array.from({ length: 3 }, () => Math.floor(Math.random() * 5) + 1);
-    const coefficients2 = Array.from({ length: 3 }, () => Math.floor(Math.random() * 10) + 1);
-    const exponents2 = Array.from({ length: 3 }, () => Math.floor(Math.random() * 5) + 1);
+function generateCombinedQuestion(level, difficulty) {
+    const coefficients1 = Array.from({ length: 3 }, () => Math.floor(Math.random() * difficulty) + 1);
+    const exponents1 = Array.from({ length: 3 }, () => Math.floor(Math.random() * difficulty) + 1);
+    const coefficients2 = Array.from({ length: 3 }, () => Math.floor(Math.random() * difficulty) + 1);
+    const exponents2 = Array.from({ length: 3 }, () => Math.floor(Math.random() * difficulty) + 1);
     return `f(x) = \\frac{(${coefficients1.map((coef, i) => `${coef}x^{${exponents1[i]}}`).join(' + ')}) \\cdot (${coefficients2.map((coef, i) => `${coef}x^{${exponents2[i]}}`).join(' + ')})}{\\sqrt{${coefficients2[0]}x}}`;
 }
 
-function generateTrigonometricQuestion(level) {
-    const coefficient = Math.floor(Math.random() * 10) + 1;
+function generateTrigonometricQuestion(level, difficulty) {
+    const coefficient = Math.floor(Math.random() * difficulty) + 1;
     return `f(x) = ${coefficient} \\sin(x)`;
 }
 
-function generateLogarithmicQuestion(level) {
-    const coefficient = Math.floor(Math.random() * 10) + 1;
+function generateLogarithmicQuestion(level, difficulty) {
+    const coefficient = Math.floor(Math.random() * difficulty) + 1;
     return `f(x) = ${coefficient} \\log(x)`;
 }
 
-function generateExponentialQuestion(level) {
-    const coefficient = Math.floor(Math.random() * 10) + 1;
+function generateExponentialQuestion(level, difficulty) {
+    const coefficient = Math.floor(Math.random() * difficulty) + 1;
     return `f(x) = ${coefficient} e^x`;
 }
 
 function previewWorksheet() {
     const title = document.getElementById('title').value;
     const level = parseInt(document.getElementById('level').value);
+    const topic = document.getElementById('topic').value;
     const subTopic = document.getElementById('subTopic').value;
+    const functionType = document.getElementById('functionType').value;
     const numPages = parseInt(document.getElementById('numPages').value);
-    const questionsPerPage = 30; // מספר תרגילים בעמוד אחד (15 לכל עמודה)
+    const questionsPerPage = 20; // מספר תרגילים בעמוד אחד
     const numQuestions = questionsPerPage * numPages;
 
-    if (level === 3) {
-        document.getElementById('worksheet-output').innerHTML = `<p>ברמת לימוד של 3 יחידות אין צורך לדעת נגזרת.</p>`;
+    if (!title || !topic || !subTopic || !functionType) {
+        document.getElementById('worksheet-output').innerHTML = `<p style="color: red;">יש לבחור נושא, תת-נושא וסוג פונקציה.</p>`;
         return;
     }
 
-    const questions = generateQuestions(level, subTopic, numQuestions);
+    if (level === 3) {
+        document.getElementById('worksheet-output').innerHTML = `<p style="color: red;">ברמת לימוד של 3 יחידות אין צורך לדעת נגזרת.</p>`;
+        return;
+    }
+
+    const questions = generateQuestions(level, functionType, numQuestions);
     let worksheetHTML = '';
 
     for (let page = 0; page < numPages; page++) {
         worksheetHTML += `<div class="worksheet-content">`;
-        worksheetHTML += `<h2>${title}</h2>`;
+        worksheetHTML += `<h2 class="worksheet-title">${title}</h2>`;
         worksheetHTML += `<p>גזור את הפונקציות הבאות:</p>`;
         worksheetHTML += `<table class="questions-table">`;
 
-        for (let i = 0; i < questionsPerPage; i += 2) {
-            const index1 = page * questionsPerPage + i;
-            const index2 = index1 + 1;
-            if (index1 >= questions.length) break;
+        for (let i = 0; i < questionsPerPage; i++) {
+            const index = page * questionsPerPage + i;
+            if (index >= questions.length) break;
 
             worksheetHTML += `<tr>`;
-            worksheetHTML += `<td class="question-number">(${index1 + 1})</td>`;
-            worksheetHTML += `<td class="question-text">\\(${questions[index1]}\\)</td>`;
-            if (index2 < questions.length) {
-                worksheetHTML += `<td class="question-number">(${index2 + 1})</td>`;
-                worksheetHTML += `<td class="question-text">\\(${questions[index2]}\\)</td>`;
-            } else {
-                worksheetHTML += `<td></td><td></td>`;
-            }
+            worksheetHTML += `<td class="question-number">(${index + 1})</td>`;
+            worksheetHTML += `<td class="question-text">\\(${questions[index]}\\)</td>`;
             worksheetHTML += `</tr>`;
         }
 
@@ -132,14 +132,38 @@ function previewWorksheet() {
     MathJax.typeset();
 }
 
+function toggleSubTopic() {
+    const topic = document.getElementById('topic').value;
+    const subTopicGroup = document.getElementById('subTopicGroup');
+    if (topic === 'functions') {
+        subTopicGroup.style.display = 'block';
+    } else {
+        subTopicGroup.style.display = 'none';
+        document.getElementById('subTopic').value = '';
+        toggleFunctionType();
+    }
+}
+
+function toggleFunctionType() {
+    const subTopic = document.getElementById('subTopic').value;
+    const functionTypeGroup = document.getElementById('functionTypeGroup');
+    if (subTopic === 'derivative') {
+        functionTypeGroup.style.display = 'block';
+    } else {
+        functionTypeGroup.style.display = 'none';
+        document.getElementById('functionType').value = '';
+    }
+}
+
 function printWorksheet() {
     const printContents = document.getElementById('worksheet-output').innerHTML;
-    const originalContents = document.body.innerHTML;
-
-    document.body.innerHTML = `<div class="print-container">${printContents}</div>`;
-
-    window.print();
-
-    document.body.innerHTML = originalContents;
-    MathJax.typeset(); // Render MathJax again after restoring the original content
+    const printWindow = window.open('', '', 'height=1123,width=794');
+    printWindow.document.write('<html><head><title>Print Worksheet</title>');
+    printWindow.document.write('<link rel="stylesheet" href="styles.css">');
+    printWindow.document.write('</head><body>');
+    printWindow.document.write('<div class="print-container">');
+    printWindow.document.write(printContents);
+    printWindow.document.write('</div></body></html>');
+    printWindow.document.close();
+    printWindow.print();
 }

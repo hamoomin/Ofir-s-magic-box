@@ -11,7 +11,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>המחולל של אופיר</h1>
+        <h1>מחולל דפי עבודה במתמטיקה</h1>
         <div class="form">
             <div class="form-group">
                 <label for="title">כותרת:</label>
@@ -20,15 +20,31 @@
             <div class="form-group">
                 <label for="level">רמת לימוד:</label>
                 <select id="level" name="level" onchange="checkLevel()">
+                    <option value="">בחר רמת לימוד</option>
                     <option value="3">3 יח"ל</option>
-                    <option value="4" selected>4 יח"ל</option>
+                    <option value="4">4 יח"ל</option>
                     <option value="5">5 יח"ל</option>
                 </select>
                 <p id="level-warning" style="display:none; color: red;">ברמת לימוד של 3 יחידות אין צורך לדעת נגזרת.</p>
             </div>
             <div class="form-group">
+                <label for="topic">נושא:</label>
+                <select id="topic" name="topic" onchange="toggleSubTopic()">
+                    <option value="">בחר נושא</option>
+                    <option value="functions">פונקציות</option>
+                </select>
+            </div>
+            <div class="form-group" id="subTopicGroup" style="display:none;">
                 <label for="subTopic">תת-נושא:</label>
-                <select id="subTopic" name="subTopic">
+                <select id="subTopic" name="subTopic" onchange="toggleFunctionType()">
+                    <option value="">בחר תת-נושא</option>
+                    <option value="derivative">נגזרת</option>
+                </select>
+            </div>
+            <div class="form-group" id="functionTypeGroup" style="display:none;">
+                <label for="functionType">סוג פונקציה:</label>
+                <select id="functionType" name="functionType">
+                    <option value="">בחר סוג פונקציה</option>
                     <option value="polynomial">פולינום</option>
                     <option value="product">מכפלה</option>
                     <option value="quotient">מנה</option>

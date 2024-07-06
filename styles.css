@@ -109,9 +109,8 @@ select {
 .worksheet-content {
     background-color: #ffffff;
     color: #000000;
-    width: 754px; /* 95% מרוחב עמוד A4 ב-px */
-    height: 1067px; /* 95% מגובה עמוד A4 ב-px */
-    page-break-after: always;
+    width: 100%; /* 100% מגודל המסך */
+    height: auto;
     padding: 20px; /* גבולות הדפסה */
     box-sizing: border-box;
     overflow: hidden; /* למנוע חיתוך */
@@ -153,6 +152,14 @@ select {
         padding: 0;
     }
     .worksheet-content {
-        page-break-inside: avoid;
+        width: 794px; /* רוחב עמוד A4 ב-px */
+        height: 1123px; /* גובה עמוד A4 ב-px */
+        page-break-after: always;
+        padding: 20px; /* גבולות הדפסה */
+        box-sizing: border-box;
+        overflow: hidden;
+    }
+    @page {
+        margin: 20mm; /* שוליים סטנדרטיים */
     }
 }
